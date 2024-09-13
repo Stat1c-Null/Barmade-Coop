@@ -9,11 +9,15 @@ public class PlayerCamera : MonoBehaviour
     private float verticalRotStore;
     private Vector2 mouseInput;
     public bool invertLook;
+
+    private Camera camera;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        camera = Camera.main;
     }
 
     // Update is called once per frame
@@ -34,5 +38,10 @@ public class PlayerCamera : MonoBehaviour
         } else {
             viewPoint.rotation = Quaternion.Euler(-verticalRotStore, viewPoint.rotation.eulerAngles.y, viewPoint.rotation.eulerAngles.z);//Remove minus in front of verticalRotStore if you need inverted mouse
         }
+    }
+
+    private void LateUpdate() {
+        camera.transform.position = viewPoint.position;
+        camera.transform.rotation = viewPoint.rotation;
     }
 }
