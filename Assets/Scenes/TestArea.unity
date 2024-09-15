@@ -255,6 +255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   runSpeed: 8
+  jumpForce: 7
+  gravityMod: 1.7
   charControl: {fileID: 224558537}
 --- !u!114 &224558536
 MonoBehaviour:

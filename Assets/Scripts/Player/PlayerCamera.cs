@@ -25,10 +25,10 @@ public class PlayerCamera : MonoBehaviour
     {
         mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * mouseSensitivity;
 
-        //Horizontal Rotation
+        // * Horizontal Rotation
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.x);
 
-        //Vertical Rotation
+        // * Vertical Rotation
         verticalRotStore += mouseInput.y;
         verticalRotStore = Mathf.Clamp(verticalRotStore, -60f, 60f);
         //TODO: Implement inverted mouse in settings

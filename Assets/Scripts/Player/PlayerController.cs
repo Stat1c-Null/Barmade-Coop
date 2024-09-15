@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed, runSpeed;
     private float activeMoveSpeed;
     private Vector3 moveDir, movement;
+    public float jumpForce, gravityMod;
 
     public CharacterController charControl;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
+        // * Sprinting
         if(Input.GetKey(KeyCode.LeftShift))
         {
             activeMoveSpeed = runSpeed;
@@ -33,15 +34,26 @@ public class PlayerController : MonoBehaviour
         float yVelocity = movement.y;
         movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized * activeMoveSpeed;//normalized makes this one whole value, so player won't move faster if pressing both forward and side button
 
-        if(!charControl.isGrounded)//Reset yvelocity value when player is on the ground
+        //* Gravity
+        /*if(!charControl.isGrounded)//Reset yvelocity value when player is on the ground
         {
             movement.y = yVelocity;
         } else {
             movement.y = 0f;
+        }*/
+        movement.y = yVelocity;
+        if(charControl.isGrounded) {
+            movement.y = 0f;
+        }
+        movement.y += Physics.gravity.y * Time.deltaTime * gravityMod;//Apply physics to player
+
+        //* Jumping
+        if(Input.GetButtonDown("Jump") && charControl.isGrounded)
+        {
+            movement.y = jumpForce;
         }
 
-        movement.y += Physics.gravity.y * Time.deltaTime;//Apply physics to player
-
-        charControl.Move(movement  * Time.deltaTime);
+        //* Move Player
+        charControl.Move(movement * Time.deltaTime);
     }
 }
