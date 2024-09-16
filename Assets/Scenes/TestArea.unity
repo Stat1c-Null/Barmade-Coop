@@ -239,6 +239,7 @@ Transform:
   m_Children:
   - {fileID: 1522359999}
   - {fileID: 48741039}
+  - {fileID: 1677071111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &224558535
@@ -258,6 +259,11 @@ MonoBehaviour:
   jumpForce: 7
   gravityMod: 1.7
   charControl: {fileID: 224558537}
+  groundCheck: {fileID: 1677071111}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckDistance: 0.5
 --- !u!114 &224558536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +318,7 @@ GameObject:
   - component: {fileID: 303510984}
   - component: {fileID: 303510983}
   - component: {fileID: 303510987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +450,7 @@ GameObject:
   - component: {fileID: 653316272}
   - component: {fileID: 653316271}
   - component: {fileID: 653316270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985020323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WorldObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +779,7 @@ GameObject:
   - component: {fileID: 1026570061}
   - component: {fileID: 1026570060}
   - component: {fileID: 1026570059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +885,7 @@ GameObject:
   - component: {fileID: 1068711982}
   - component: {fileID: 1068711981}
   - component: {fileID: 1068711985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1117,7 +1123,7 @@ GameObject:
   - component: {fileID: 1603395333}
   - component: {fileID: 1603395332}
   - component: {fileID: 1603395336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,6 +1243,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1677071110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677071111}
+  m_Layer: 0
+  m_Name: GroundCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1677071111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677071110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 224558534}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854667038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,7 +1287,7 @@ GameObject:
   - component: {fileID: 1854667040}
   - component: {fileID: 1854667039}
   - component: {fileID: 1854667043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1383,7 +1420,7 @@ GameObject:
   - component: {fileID: 1955783456}
   - component: {fileID: 1955783455}
   - component: {fileID: 1955783459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

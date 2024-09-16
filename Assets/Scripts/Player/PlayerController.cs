@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController charControl;
 
+    public Transform groundCheck;
+    private bool isGrounded;
+    public LayerMask groundLayer;
+    public float groundCheckDistance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +52,10 @@ public class PlayerController : MonoBehaviour
         }
         movement.y += Physics.gravity.y * Time.deltaTime * gravityMod;//Apply physics to player
 
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, groundCheckDistance, groundLayer);//Check if player is on the ground
+
         //* Jumping
-        if(Input.GetButtonDown("Jump") && charControl.isGrounded)
+        if(Input.GetButtonDown("Jump") && isGrounded)
         {
             movement.y = jumpForce;
         }

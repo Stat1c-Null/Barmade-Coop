@@ -38,6 +38,17 @@ public class PlayerCamera : MonoBehaviour
         } else {
             viewPoint.rotation = Quaternion.Euler(-verticalRotStore, viewPoint.rotation.eulerAngles.y, viewPoint.rotation.eulerAngles.z);//Remove minus in front of verticalRotStore if you need inverted mouse
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        } else if(Cursor.lockState == CursorLockMode.None) 
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
     }
 
     private void LateUpdate() {
