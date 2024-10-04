@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //* Move direction is determined by mouse rotation
         moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
         // * Sprinting
@@ -37,7 +38,9 @@ public class PlayerController : MonoBehaviour
         }
 
         float yVelocity = movement.y;
-        movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized * activeMoveSpeed;//normalized makes this one whole value, so player won't move faster if pressing both forward and side button
+        Vector3 targetMovement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized * activeMoveSpeed;//normalized makes this one whole value, so player won't move faster if pressing both forward and side button
+        movement = Vector3.Lerp(movement, targetMovement, (moveDir.magnitude > 0 ? 4 : 4) * Time.deltaTime);//After move glide
+        //movement = ((transform.forward * moveDir.z) + (transform.right * moveDir.x)).normalized * activeMoveSpeed;
 
         //* Gravity
         /*if(!charControl.isGrounded)//Reset yvelocity value when player is on the ground

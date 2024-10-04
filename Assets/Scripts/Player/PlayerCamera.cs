@@ -39,6 +39,7 @@ public class PlayerCamera : MonoBehaviour
             viewPoint.rotation = Quaternion.Euler(-verticalRotStore, viewPoint.rotation.eulerAngles.y, viewPoint.rotation.eulerAngles.z);//Remove minus in front of verticalRotStore if you need inverted mouse
         }
 
+        // * Unlock cursor when player presses escape
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
