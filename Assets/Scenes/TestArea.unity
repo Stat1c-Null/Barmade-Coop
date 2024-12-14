@@ -396,6 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletImpact: {fileID: 7041651334453391978, guid: 2518fe659e5b9054f950317a524fb082, type: 3}
   impactDestroyTimer: 60
+  timeBetweenShots: 0.2
+  automaticFire: 1
 --- !u!1 &303510982
 GameObject:
   m_ObjectHideFlags: 0

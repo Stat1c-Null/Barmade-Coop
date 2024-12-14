@@ -6,7 +6,15 @@ public class playerShoot : MonoBehaviour
 {
 
     public GameObject bulletImpact;
+
     public float impactDestroyTimer;
+    public float timeBetweenShots;
+    private float shotCounter;
+    public float maxHeat, heatPerShot, coolRate, overheatCoolRate;
+
+    public bool automaticFire;
+    public bool AmmoWeapon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +25,20 @@ public class playerShoot : MonoBehaviour
     void Update()
     {
         //* Player Shoot
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !automaticFire)
         {
             Shoot();
+        } else if(Input.GetMouseButtonDown(0) && automaticFire) {
+            FullAuto();
+        }
+
+        //*Check if left click is been held down
+        if(Input.GetMouseButton(0) && automaticFire) {
+            shotCounter -= Time.deltaTime;
+
+            if(shotCounter <= 0) {
+                FullAuto();
+            }
         }
     }
 
@@ -35,5 +54,12 @@ public class playerShoot : MonoBehaviour
             Destroy(bulletImpactObject, impactDestroyTimer);
         }
 
+    }
+
+    private void FullAuto()
+    {
+        Shoot();
+
+        shotCounter = timeBetweenShots;
     }
 }
