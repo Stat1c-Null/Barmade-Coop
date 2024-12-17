@@ -11,6 +11,8 @@ public class playerShoot : MonoBehaviour
     public float timeBetweenShots;
     private float shotCounter;
     public float maxHeat, heatPerShot, coolRate, overheatCoolRate;
+    private float heatCounter;
+    private bool overHeated;
 
     public bool automaticFire;
     public bool AmmoWeapon;
@@ -24,23 +26,41 @@ public class playerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //* Player Shoot
-        if(Input.GetMouseButtonDown(0) && !automaticFire)
-        {
-            Shoot();
-        } else if(Input.GetMouseButtonDown(0) && automaticFire) {
-            FullAuto();
-        }
-
-        //*Check if left click is been held down
-        if(Input.GetMouseButton(0) && automaticFire) {
-            shotCounter -= Time.deltaTime;
-
-            if(shotCounter <= 0) {
+        //*Check if weapon havent overheated
+        if(!overHeated){
+            //* Player Shoot
+            if(Input.GetMouseButtonDown(0) && !automaticFire)
+            {
+                Shoot();
+            } else if(Input.GetMouseButtonDown(0) && automaticFire) {
                 FullAuto();
             }
+
+            //*Check if left click is been held down
+            if(Input.GetMouseButton(0) && automaticFire) {
+                shotCounter -= Time.deltaTime;
+
+                if(shotCounter <= 0) {
+                    FullAuto();
+                }
+            }
+            heatCounter -= coolRate * Time.deltaTime;
+        } else {
+            heatCounter -= overheatCoolRate * Time.deltaTime;
+            if(heatCounter <= 0) {
+                heatCounter = 0;
+
+                overHeated = false;
+
+                UIController.instance.overheatedText.gameObject.SetActive(false);
+            }
         }
-    }
+
+        if(heatCounter < 0)
+        {
+            heatCounter = 0f;
+        }
+    } 
 
     private void Shoot() 
     {
@@ -54,6 +74,15 @@ public class playerShoot : MonoBehaviour
             Destroy(bulletImpactObject, impactDestroyTimer);
         }
 
+        //*Check if weapon overheated
+        heatCounter += heatPerShot;
+        if(heatCounter >= maxHeat) {
+            heatCounter = maxHeat;
+
+            overHeated = true;
+
+            UIController.instance.overheatedText.gameObject.SetActive(true);
+        }
     }
 
     private void FullAuto()
