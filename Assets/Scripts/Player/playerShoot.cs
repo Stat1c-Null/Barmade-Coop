@@ -20,7 +20,7 @@ public class playerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        UIController.instance.weaponHeatSlider.maxValue = maxHeat;
     }
 
     // Update is called once per frame
@@ -60,6 +60,8 @@ public class playerShoot : MonoBehaviour
         {
             heatCounter = 0f;
         }
+
+        UIController.instance.weaponHeatSlider.value = heatCounter;
     } 
 
     private void Shoot() 
