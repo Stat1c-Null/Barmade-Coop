@@ -17,6 +17,9 @@ public class playerShoot : MonoBehaviour
     public bool automaticFire;
     public bool AmmoWeapon;
 
+    public Gun[] guns;
+    private int selectedGun;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,23 @@ public class playerShoot : MonoBehaviour
         }
 
         UIController.instance.weaponHeatSlider.value = heatCounter;
+
+        //*Switch guns
+        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f) { //*Check if wheel is scrolled up to switch guns
+            selectedGun++;
+
+            if(selectedGun >= guns.Length) {
+                selectedGun = 0;
+            }
+            SwitchGun();
+        } else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f) {
+            selectedGun--;
+
+            if(selectedGun < 0) {
+                selectedGun = guns.Length - 1;
+            }
+            SwitchGun();
+        }
     } 
 
     private void Shoot() 
@@ -92,5 +112,14 @@ public class playerShoot : MonoBehaviour
         Shoot();
 
         shotCounter = timeBetweenShots;
+    }
+
+    private void SwitchGun() 
+    {
+        foreach(Gun gun in guns) {
+            gun.gameObject.SetActive(false);
+        }
+
+        guns[selectedGun].gameObject.SetActive(true);
     }
 }
